@@ -1,0 +1,60 @@
+language: php
+
+branches:
+  only:
+    - dev
+    - master
+
+php:
+  - 7.4
+
+services:
+  - mysql
+  - redis-server
+
+addons:
+  artifacts:
+    paths:
+      - build
+
+sudo: false
+
+env:
+  global:
+    - APPLICATION_ENV="test"
+    - VIRTUAL_HOST="api.icoordinator.com"
+    - WEB_BASE_URL="https://icoordinator.com"
+    - DB_PDO_DRIVER="pdo_mysql"
+    - DB_USER="root"
+    - DB_NAME="icoordinator_test"
+    - FILE_STORAGE_S3_BUCKET_NAME="icoordinator.travis.filestorage"
+    - UPLOADS_STORAGE_S3_BUCKET_NAME="icoordinator.travis.uploads"
+    - S3_REGION="eu-west-1"
+    - ARTIFACTS_BUCKET="icoordinator.travis-build-artifacts"
+    - ARTIFACTS_S3_REGION="eu-west-1"
+    - REDIS_HOST="localhost"
+    - REDIS_PORT=6379
+    - SUPERADMIN="1"
+  matrix:
+    - FILE_STORAGE_TYPE="S3"
+
+install:
+  - pear config-set preferred_state stable
+  - pecl channel-update pecl.php.net
+  - echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - echo "extension = apc.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - pecl install -f apcu_bc-beta
+  - phpenv config-add travis/php.ini
+  - php -i
+  - npm install -g grunt-cli
+  - npm install
+  - printenv
+
+before_script:
+  - mysql -e 'SET GLOBAL sql_mode=NO_ENGINE_SUBSTITUTION;create database icoordinator_test;'
+
+
+script:
+  - grunt build:test
+  - grunt code-analyse:stdout
+  - grunt phpunit:stdout

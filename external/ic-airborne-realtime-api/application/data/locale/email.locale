@@ -1,0 +1,78 @@
+<?php
+global $langArray;
+global $email_locale;
+$brand_name = getenv('BRAND_NAME');
+$email_locale = array(
+    "inbound-email-file-upload-internal-server-error-subject" => $langArray["inbound_unexpected_server_error"],
+    "inbound-email-file-upload-internal-server-error-header" => $langArray["files_not_uploaded"],
+    "inbound-email-file-upload-internal-server-error-body" => "<p>".$langArray["files_not_uploaded_msg"].".</p>",
+
+    "inbound-email-file-upload-success-subject" => $langArray["inbound_successful_upload"],
+    "inbound-email-file-upload-success-header" => $langArray["files_uploaded"],
+    "inbound-email-file-upload-success-body" =>"<p>".$langArray["files_uploaded_msg"].".</p>"
+        ."<p>".$langArray["files"].": *|FILE_NAMES|*</p>",
+
+    "inbound-email-file-upload-wrong-email-error-subject" => $langArray["inbound_wrong_email"],
+    "inbound-email-file-upload-wrong-email-error-header" => $langArray["files_not_uploaded"],
+    "inbound-email-file-upload-wrong-email-error-body" =>"<p>".$langArray["files_not_uploaded_email_msg"].":<br/>"
+        ."*|WRONG_EMAIL|*</p>",
+
+    "password-reset-subject" => $langArray["password_reset_success"],
+    "password-reset-header" => "",
+    "password-reset-body" => "<p>".$langArray["password_reset_success_msg"]."</p>"
+        ."<ul><li>".$langArray["new_password"].": *|PASSWORD|*</li></ul>",
+
+    "portal-invitation-subject" => $langArray["invitation_to_portal"],
+    "portal-invitation-header" => $langArray["portal_invitation_greeting"],
+    "portal-invitation-body" => "<p>".$langArray["portal_invitation_msg"].":<br><b>*|PORTAL_NAME|*</b></p>"
+        ."<p><a href=\"*|INVITATION_URL|*\">".$langArray["accept_invitation"]."</a></p>",
+
+    "send-event-notification-subject" => $langArray["brand_notification_report"],
+    "send-event-notification-header" => $langArray["notification_report"],
+    "send-event-notification-body" => "<p>*|NOTIFICATION_LIST|*</p>",
+
+    "shared-file-notification-subject" => $langArray["notification_file_was_shared"],
+    "shared-file-notification-header" => $langArray["shared_file_notification_greeting"],
+    "shared-file-notification-body" => "<p>".$langArray["shared_file_notification_msg"].":</p>"
+        ."<p><b><a href=\"*|SHARED_LINK_URL|*\">*|FILE_NAME|*</a></b></p>"
+        ."<p>".$langArray["message"].": *|MESSAGE|*</p>",
+
+    "shared-files-notification-subject" => $langArray["notification_files_were_shared"],
+    "shared-files-notification-header" => $langArray["shared_files_notification_greeting"],
+    "shared-files-notification-body" => "<p>".$langArray["message"].": *|MESSAGE|*</p>"
+        ."<p><b>*|SHARED_LINK_URLS|*</b></p>",
+
+    "shared-folder-notification-subject" => $langArray["notification_folder_was_shared"],
+    "shared-folder-notification-header" => $langArray["shared_folder_notification_greeting"],
+    "shared-folder-notifiation-body" => "<p>".$langArray["shared_folder_notification_msg"].":</p>"
+        ."<p><b><a href=\"*|SHARED_LINK_URL|*\">*|FOLDER_NAME|*</a></b></p>",
+
+    "sign-up-confirm-email-subject" => $langArray["complete_brand_signup"],
+    "sign-up-confirm-email-header" => $langArray["sign_up_confirm_greeting"],
+    "sign-up-confirm-email-body" => "<p>".$langArray["welcome_to_brand"]."!</p>"
+        ."<p>".$langArray["sign_up_comfirm_msg"]."</p>"
+        ."<p><a href=\"*|CONFIRMATION_URL|*\">".$langArray["verify_email"]."</a></p>",
+
+    "sign-up-invitation-subject" => $langArray["invitation_to_brand"],
+    "sign-up-invitation-header" => $langArray["invitation_greeting"],
+    "sign-up-invitation-body" => "<p>".$langArray["invitation_msg"].":<br/><b>*|PORTAL_NAME|*</b></p><p><a href=\"*|INVITATION_URL|*\">".$langArray["accept_invitation"]."</a></p>",
+
+    "sign-up-invitation-welcome-subject" => $langArray["welcome_to_brand"],
+    "sign-up-invitation-welcome-header" => $langArray["welcome_to_brand"],
+    "sign-up-invitation-welcome-body" => "<p>".$langArray["invitation_accepted_msg"]."<b>*|PORTAL_NAME|*</b><br/></p>".
+        "<ul><li>".$langArray["here_are_your_credentials"].":</li>".
+        "<li>".$langArray["login"].": *|EMAIL|*</li>".
+        "<li>".$langArray["password"].": *|PASSWORD|*</li></ul>".
+        "<br/>".$langArray["start_collaborating_msg"].".<br/><br/>"
+        .$langArray["thank_you_for_using_brand"]."!",
+
+    "sign-up-welcome-subject" => $langArray["welcome_to_brand"],
+    "sign-up-welcome-header" => $langArray["welcome_to_brand"],
+    "sign-up-welcome-body" => "<p>".$langArray["brand_account_created"].".</p>".
+    "<ul><li>".$langArray["login"].": *|EMAIL|*</li>"
+    ."<li>".$langArray["password"].": *|PASSWORD|*</li></ul>",
+    "copy-workspace-subject" => $langArray["copy_workspace_subject"],
+    "copy-workspace-header" => $langArray["copy_workspace_header"],
+    "copy-workspace-body" => "<p>".$langArray["copy_workspace_workspace_created"]."</p>".
+    "<p>".$langArray["new_workspace"].": *|NEW_WORKSPACE_NAME|*</p>"
+);

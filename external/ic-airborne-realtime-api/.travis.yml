@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "0.12"
+
+branches:
+  only:
+    - /^v[0-9]+[.][0-9]+[.][0-9]+/
+    - develop
+
+env:
+  global:
+    - ARTIFACTS_BUCKET="icoordinator.travis-build-artifacts"
+    - ARTIFACTS_S3_REGION="eu-west-1"
+
+addons:
+  artifacts: true

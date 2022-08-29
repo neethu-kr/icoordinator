@@ -1,0 +1,4 @@
+*|INVITED_BY_NAME|* has invited you to work in the following portal:
+*|PORTAL_NAME|*
+
+Accept invitation: *|INVITATION_URL|*

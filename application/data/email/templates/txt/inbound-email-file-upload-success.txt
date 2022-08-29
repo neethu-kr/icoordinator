@@ -1,0 +1,2 @@
+You file was successfully uploaded
+Files: *|FILE_NAMES|*

@@ -1,0 +1,7 @@
+Verify your email to start using *|BRAND_NAME|*
+
+Welcome to *|BRAND_NAME|*!
+Just verify your email to get started. We do this as a security precaution to verify your credentials.
+
+
+Verify email - *|CONFIRMATION_URL|*

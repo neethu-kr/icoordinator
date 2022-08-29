@@ -1,0 +1,3 @@
+*|USER_NAME|* has shared the following files with you:
+(*|SHARED_LINK_URLS|*)
+Message: *|MESSAGE|*

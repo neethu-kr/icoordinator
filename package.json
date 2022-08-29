@@ -1,0 +1,43 @@
+{
+  "name": "icoordinator-new-api",
+  "version": "0.0.2",
+  "private": true,
+  "description": "iCoordinator REST Services",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/designtech/icoordinator-new-api.git"
+  },
+  "author": {
+    "name": "Constantine Yurevich",
+    "email": "constantine.yurevich@designtech.se"
+  },
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/designtech/icoordinator-new-api/issues"
+  },
+  "devDependencies": {
+    "async": "^0.9.0",
+    "each-async": "^1.1.0",
+    "grunt": "^0.4.5",
+    "grunt-bump": "^0.3.1",
+    "grunt-chmod": "^1.0.3",
+    "grunt-cli": "^0.1.13",
+    "grunt-composer": "^0.4.4",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-env": "~0.4.1",
+    "grunt-mkdir": "^0.1.2",
+    "grunt-pdepend": "^0.1.2",
+    "grunt-php": "~0.3.3",
+    "grunt-php-analyzer": "~0.1.0",
+    "grunt-phpcpd": "^0.1.4",
+    "grunt-phpcs": "~0.2.2",
+    "grunt-phplint": "0.0.5",
+    "grunt-phpmd": "^0.1.1",
+    "grunt-phpunit": "~0.3.3",
+    "grunt-shell": "~0.7.0"
+  }
+}

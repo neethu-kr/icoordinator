@@ -1,0 +1,7 @@
+Welcome to *|BRAND_NAME|*!
+
+You have been invited to <b>work in</b> the following portal:
+*|PORTAL_NAME|*
+
+Login: *|EMAIL|*
+Password: *|PASSWORD|*

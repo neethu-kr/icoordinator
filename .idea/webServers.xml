@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="0852a762-0c08-4fdd-9e6b-34d73c9b3692" name="Designtech Docker">
+        <fileTransfer accessType="SFTP" host="127.0.0.1" port="2222" sshConfigId="9e4298f4-6cfb-4441-8449-5c0dff0da70a" sshConfig="root@127.0.0.1:2222 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

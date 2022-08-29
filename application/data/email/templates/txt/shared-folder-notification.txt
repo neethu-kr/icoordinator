@@ -1,0 +1,2 @@
+*|USER_NAME|* has shared the following folder with you:
+*|FOLDER_NAME|* (*|SHARED_LINK_URL|*)

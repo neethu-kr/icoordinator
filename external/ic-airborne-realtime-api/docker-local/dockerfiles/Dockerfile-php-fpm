@@ -1,0 +1,68 @@
+FROM php:7.4.25-fpm
+
+RUN apt-get update \
+  && apt-get install --yes --no-install-recommends libpq-dev curl gnupg build-essential git\
+  && docker-php-ext-install pdo_pgsql pdo_mysql
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x  | bash -
+
+RUN apt-get -y install nodejs openssh-server default-mysql-client npm
+
+RUN npm install --prefix=/usr/ -g grunt-cli grunt
+
+#INSTALL APCU
+RUN pecl install apcu && docker-php-ext-enable apcu
+RUN echo "apc.enable_cli=1" >> /usr/local/etc/php/conf.d/apcu.ini
+RUN echo "apc.enable=1" >> /usr/local/etc/php/conf.d/apcu.ini
+#APCU
+
+# Enable LDAP
+RUN apt-get install -y libldap2-dev
+RUN docker-php-ext-configure ldap \
+    && docker-php-ext-install ldap \
+    && php -m
+# LDAP
+
+# Enable ZIP
+RUN apt-get install -y zip unzip zlib1g-dev libzip-dev
+RUN docker-php-ext-configure zip \
+    && docker-php-ext-install zip \
+    && php -m
+# ZIP
+
+
+RUN curl -fsSL 'https://xdebug.org/files/xdebug-2.9.8.tgz' -o xdebug.tar.gz \
+    && mkdir -p xdebug \
+    && tar -xf xdebug.tar.gz -C xdebug --strip-components=1 \
+    && rm xdebug.tar.gz \
+    && ( \
+    cd xdebug \
+    && phpize \
+    && ./configure --enable-xdebug \
+    && make -j$(nproc) \
+    && make install \
+    ) \
+    && rm -r xdebug \
+    && docker-php-ext-enable xdebug
+
+
+RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_host=docker.for.mac.localhost" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_log=/tmp/xdebug.log" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+RUN echo "pm = ondemand" >> /usr/local/etc/php-fpm.d/www.conf \
+    && echo "pm.max_children = 128" >> /usr/local/etc/php-fpm.d/www.conf \
+    && echo "pm.process_idle_timeout = 3s" >> /usr/local/etc/php-fpm.d/www.conf
+
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config \
+    && echo "root:test" | chpasswd
+
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+
+RUN mkdir -p /app/var/cache && mkdir -p /storage && chown www-data:www-data /storage
+
+CMD  sleep 40 ; /usr/bin/mysql -h db -u root --password=test -e "drop database bimcontact; create database bimcontact;"; /usr/bin/grunt doctrine:noninteractive:migrations:migrate ; /usr/bin/grunt doctrine:noninteractive:orm:generate:proxies; /usr/bin/mysql -h db -u root --password=test -e "source post-init-setup.sql"; touch /tmp/xdebug.log; chown www-data:www-data /tmp/xdebug.log  ; /etc/init.d/ssh start ; /usr/local/sbin/php-fpm ;
+
+WORKDIR /app
